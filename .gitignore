@@ -1,0 +1,7 @@
+ecommerce-test-env/
+drivers/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+.env
