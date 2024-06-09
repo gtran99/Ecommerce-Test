@@ -38,16 +38,6 @@ jobs:
           pip install -r requirements.txt
           pip install -r test-requirements.txt
 
-      - name: Download ChromeDriver
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
-          wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip -P ~/Downloads
-          unzip ~/Downloads/chromedriver_linux64.zip -d ~/Downloads
-          mkdir -p drivers
-          mv ~/Downloads/chromedriver drivers/chromedriver
-          chmod +x drivers/chromedriver
-
       - name: Initialize database
         run: |
           source venv/bin/activate
