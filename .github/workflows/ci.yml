@@ -44,8 +44,9 @@ jobs:
           sudo apt-get install -y unzip
           wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip -P ~/Downloads
           unzip ~/Downloads/chromedriver_linux64.zip -d ~/Downloads
-          sudo mv -f ~/Downloads/chromedriver /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
+          mkdir -p drivers
+          mv ~/Downloads/chromedriver drivers/chromedriver
+          chmod +x drivers/chromedriver
 
       - name: Initialize database
         run: |

@@ -5,14 +5,14 @@ import os
 
 @pytest.fixture(scope="module")
 def driver():
-    # Assuming chromedriver is placed in the 'drivers' directory
-    #print(os.path.dirname(__file__), "drivers", "chromedriver")
-    chrome_driver_path = os.path.join(os.path.dirname(__file__), "drivers", "chromedriver.exe")
-
-    print(f"Using ChromeDriver from: {chrome_driver_path}")  # Debugging line
+    # Determine the path to the ChromeDriver based on the environment
+    if os.name == 'nt':  # Windows
+        driver_path = os.path.join('drivers', 'chromedriver.exe')
+    else:  # macOS or Linux for CI
+        driver_path = os.path.join('drivers', 'chromedriver')
 
     # Create a Service object with the path to the ChromeDriver
-    service = Service(executable_path=chrome_driver_path)
+    service = Service(executable_path=driver_path)
 
     # Initialize the WebDriver with the service object
     driver = webdriver.Chrome(service=service)
