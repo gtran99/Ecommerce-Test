@@ -1,4 +1,6 @@
-ecommerce-test-env/
+venv/
+instance/
+migrations/
 drivers/
 .pytest_cache/
 __pycache__/
