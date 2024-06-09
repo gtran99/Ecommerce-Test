@@ -11,11 +11,8 @@ def driver():
     else:  # macOS or Linux for CI
         driver_path = os.path.join('drivers', 'chromedriver')
 
-    # Create a Service object with the path to the ChromeDriver
-    service = Service(executable_path=driver_path)
-
-    # Initialize the WebDriver with the service object
-    driver = webdriver.Chrome(service=service)
+    # Initialize the WebDriver
+    driver = webdriver.Chrome(executable_path=driver_path)
     driver.implicitly_wait(10)  # Wait up to 10 seconds for elements to appear
     yield driver
     driver.quit()
