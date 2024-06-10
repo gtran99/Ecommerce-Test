@@ -58,16 +58,11 @@ flask db migrate -m "Initial migration."
 flask db upgrade
 ```
 
-### 5. Run the application
+### 5. Run the application or tests
 
 ```bash
-python app.py
-```
-
-### 6. Run the tests
-
-```bash
-pytest tests
+python run.py #app
+pytest tests #tests
 ```
 
 <br/>
@@ -81,12 +76,10 @@ This project includes a GitHub Actions workflow for continuous integration. The 
 #### GitHub Secrets
 Ensure you have the following secrets set up in your GitHub repository:
 
-```bash
-POSTGRES_USER
-POSTGRES_PASSWORD
-POSTGRES_DB
-DATABASE_URL
-```
+- POSTGRES_USER
+- POSTGRES_PASSWORD
+- POSTGRES_DB
+- DATABASE_URL
 
 The CI workflow currently performs the following steps:
 <br/>
