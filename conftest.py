@@ -7,11 +7,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 def driver():
     service = ChromeService(executable_path=ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Run in headless mode for CI
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-
-    # Initialize the WebDriver with WebDriverManager
+    # options.add_argument('--headless')  # Run in headless mode for CI
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome(service=service, options=options)
+
+     # Maximize the browser window (important for login tests)
+    driver.maximize_window()
     yield driver
     driver.quit()
