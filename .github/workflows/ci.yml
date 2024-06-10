@@ -48,6 +48,21 @@ jobs:
           fi
           flask db upgrade
 
+      - name: Start Flask application
+        run: |
+          source venv/bin/activate
+          nohup flask run --host=0.0.0.0 &
+      
+      - name: Wait for Flask to be ready
+        run: |
+          for i in {1..30}; do
+            if curl http://127.0.0.1:5000/; then
+              break
+            fi
+            echo "Waiting for Flask app to start..."
+            sleep 1
+          done
+
       - name: Run tests
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
