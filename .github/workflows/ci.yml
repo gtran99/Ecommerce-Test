@@ -54,7 +54,7 @@ jobs:
             unzip chromedriver-linux64.zip -d chromedriver-linux64
             
             # Move the chromedriver to the desired location
-            mv chromedriver-linux64/chromedriver drivers/chromedriver
+            mv chromedriver-linux64/chromedriver/chromedriver drivers/chromedriver
             
             # Make the chromedriver executable
             chmod +x drivers/chromedriver
