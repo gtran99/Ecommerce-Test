@@ -4,7 +4,8 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 
 @pytest.fixture(scope="session")
 def driver():
-    service = ChromeService(executable_path="./drivers/chromedriver") # Append .exe to chromedriver if testing locally
+    service = ChromeService(executable_path="./drivers/chromedriver")
+    # service = ChromeService(executable_path="./drivers/chromedriver.exe")  Uncomment if testing locally on Windows
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # Run in headless mode for CI
     options.add_argument('--no-sandbox')

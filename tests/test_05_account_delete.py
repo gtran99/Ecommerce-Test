@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
 def test_login(driver):
-    # Log in first
     driver.get("http://127.0.0.1:5000/login")
     driver.find_element(By.NAME, "email").send_keys("testuser@example.com")
     driver.find_element(By.NAME, "password").send_keys("password")
@@ -12,5 +11,5 @@ def test_login(driver):
 def test_delete_account(driver):
     test_login(driver)
     driver.get("http://127.0.0.1:5000/settings")
-    driver.find_element_by_xpath("//button[text()='Delete Account']").click()
+    driver.find_element("xpath", "//button[text()='Delete Account']").click()
     assert "Your account has been deleted." in driver.page_source
