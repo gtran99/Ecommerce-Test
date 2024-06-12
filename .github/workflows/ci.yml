@@ -48,13 +48,13 @@ jobs:
             CHROMEDRIVER_VERSION=$(cat LATEST_RELEASE_STABLE)
             
             # Download the ChromeDriver zip file for the extracted version
-            wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip
+            wget -N https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip
             
             # Unzip the downloaded file
-            unzip chromedriver-linux64.zip
+            unzip chromedriver-linux64.zip -d chromedriver-linux64
             
             # Move the chromedriver to the desired location
-            mv ~/Downloads/chromedriver drivers/chromedriver
+            mv chromedriver-linux64/chromedriver drivers/chromedriver
             
             # Make the chromedriver executable
             chmod +x drivers/chromedriver
