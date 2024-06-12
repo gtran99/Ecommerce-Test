@@ -50,6 +50,9 @@ jobs:
             # Download the ChromeDriver zip file for the extracted version
             wget -N https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip
             
+            # Create the 'drivers' directory
+            mkdir -p drivers
+
             # Unzip the downloaded file
             unzip chromedriver-linux64.zip -d chromedriver-linux64
             

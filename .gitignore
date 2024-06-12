@@ -1,4 +1,5 @@
 venv/
+drivers/
 instance/
 migrations/
 .pytest_cache/
