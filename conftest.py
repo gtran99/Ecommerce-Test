@@ -13,6 +13,5 @@ def driver():
     options.add_argument("--start-maximized")  # Start the browser maximized (important for login tests)
     
     driver = webdriver.Chrome(service=service, options=options)
-    driver.maximize_window()
     yield driver
     driver.quit()

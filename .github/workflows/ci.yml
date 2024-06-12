@@ -32,6 +32,27 @@ jobs:
           pip install -r requirements.txt
           pip install -r test-requirements.txt
 
+      - name: Install Google Chrome
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Log Google Chrome version
+        run: google-chrome --version
+
+      - name: Install ChromeDriver
+        run: |
+          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          echo "Installing ChromeDriver version $CHROMEDRIVER_VERSION"
+          wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip -d /usr/local/bin/
+          rm chromedriver_linux64.zip
+
+      - name: Log ChromeDriver version
+        run: chromedriver --version
+
       - name: Initialize database
         run: |
           source venv/bin/activate
@@ -44,14 +65,14 @@ jobs:
 
       - name: Populate database
         run: |
-            source venv/bin/activate
-            python add_products.py
-            
+          source venv/bin/activate
+          python add_products.py
+
       - name: Start Flask application
         run: |
           source venv/bin/activate
           nohup flask run --host=0.0.0.0 &
-      
+
       - name: Wait for Flask to be ready
         run: |
           for i in {1..30}; do
