@@ -41,12 +41,23 @@ jobs:
 
       - name: Install ChromeDriver
         run: |
-          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          echo "Installing ChromeDriver version $CHROMEDRIVER_VERSION"
-          wget -N https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chrome-linux64.zip
-          unzip chromedriver_linux64.zip
-          mv ~/Downloads/chromedriver drivers/chromedriver
-          chmod +x drivers/chromedriver
+            # Download the LATEST_RELEASE_STABLE file
+            wget -q https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE
+            
+            # Read the version number from the file
+            CHROMEDRIVER_VERSION=$(cat LATEST_RELEASE_STABLE)
+            
+            # Download the ChromeDriver zip file for the extracted version
+            wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip
+            
+            # Unzip the downloaded file
+            unzip chromedriver-linux64.zip
+            
+            # Move the chromedriver to the desired location
+            mv ~/Downloads/chromedriver drivers/chromedriver
+            
+            # Make the chromedriver executable
+            chmod +x drivers/chromedriver
 
       - name: Log Google Chrome version
         run: google-chrome --version
