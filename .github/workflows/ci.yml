@@ -32,27 +32,8 @@ jobs:
           pip install -r requirements.txt
           pip install -r test-requirements.txt
 
-      - name: Install Google Chrome
-        run: |
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
       - name: Log Google Chrome version
         run: google-chrome --version
-
-      - name: Install ChromeDriver
-        run: |
-          GOOGLE_CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$GOOGLE_CHROME_VERSION)
-          echo "Installing ChromeDriver version $CHROMEDRIVER_VERSION for Google Chrome version $GOOGLE_CHROME_VERSION"
-          wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip -d /usr/local/bin/
-          rm chromedriver_linux64.zip
-
-      - name: Log ChromeDriver version
-        run: chromedriver --version
 
       - name: Initialize database
         run: |
@@ -89,4 +70,4 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           source venv/bin/activate
-          pytest tests
+          pytest tests --chromedriver-executable-path ./drivers/chromedriver.exe

@@ -1,11 +1,12 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture(scope="session")
-def driver():
-    service = ChromeService(executable_path=ChromeDriverManager().install())
+def driver(request):
+     # Use the ChromeDriver from the drivers folder
+    chrome_driver_path = request.config.getoption("--chromedriver-executable-path")
+    service = ChromeService(executable_path=chrome_driver_path)
     options = webdriver.ChromeOptions()
     # options.add_argument('--headless')  # Run in headless mode for CI
     # options.add_argument('--no-sandbox')
@@ -15,3 +16,6 @@ def driver():
     driver = webdriver.Chrome(service=service, options=options)
     yield driver
     driver.quit()
+
+def pytest_addoption(parser):
+    parser.addoption("--chromedriver-executable-path", action="store", default="./drivers/chromedriver.exe")

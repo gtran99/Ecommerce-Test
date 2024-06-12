@@ -1,7 +1,6 @@
 venv/
 instance/
 migrations/
-drivers/
 .pytest_cache/
 __pycache__/
 *.pyc
