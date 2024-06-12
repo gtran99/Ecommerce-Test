@@ -100,4 +100,4 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           source venv/bin/activate
-          pytest tests --chromedriver-executable-path ./drivers/chromedriver.exe
+          pytest tests
